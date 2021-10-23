@@ -1,0 +1,37 @@
+package com.app.employeereg;
+
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.Arrays;
+
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+
+@WebServlet("/employee")
+public class EmployeeRegistration extends HttpServlet {
+	public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		response.setContentType("text/html");
+		PrintWriter out=response.getWriter();
+
+		String eid=request.getParameter("id");
+		String ename=request.getParameter("name");
+		String egender=request.getParameter("gender");
+		String[] erole=request.getParameterValues("role");
+		String[] eloc=request.getParameterValues("location");
+		boolean pass=Boolean.parseBoolean(request.getParameter("pass"));
+		out.println("<table border='2'>");
+		out.println("<tr><th>Employee Id :</th><td>"+eid+"</td></tr>");
+		out.println("<tr><th>Employee Name :</th><td>"+ename+"</td></tr>");
+		out.println("<tr><th>Employee Gender :</th><td>"+egender+"</td></tr>");
+		out.println("<tr><th>Employee Role :</th><td>"+Arrays.toString(erole)+"</td></tr>");
+		out.println("<tr><th>Employee Location :</th><td>"+Arrays.toString(eloc)+"</td></tr>");
+		out.println("<tr><th>Does the employee have passport?</th><td> "+pass+"</td><tr>");
+		out.println("</table>");
+		out.close();
+	}
+
+}
